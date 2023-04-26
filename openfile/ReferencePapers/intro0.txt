@@ -1,0 +1,39 @@
+
+Introduction
+
+Pre-training language models [1, 2, 3, 4, 5, 6, 7, 8] have greatly boosted the accuracy of NLP tasks
+in the past years. One of the most successful models is BERT [2], which mainly adopts masked
+language modeling (MLM) for pre-training1. MLM leverages bidirectional context of masked tokens
+efﬁciently, but ignores the dependency among the masked (and to be predicted) tokens [5].
+
+To improve BERT, XLNet [5] introduces permuted language modeling (PLM) for pre-training to
+capture the dependency among the predicted tokens. However, PLM has its own limitation: Each
+token can only see its preceding tokens in a permuted sequence but does not know the position
+information of the full sentence (e.g., the position information of future tokens in the permuted
+sentence) during the autoregressive pre-training, which brings discrepancy between pre-training and
+ﬁne-tuning. Note that the position information of all the tokens in a sentence is available to BERT
+while predicting a masked token.
+
+In this paper, we ﬁnd that MLM and PLM can be uniﬁed in one view, which splits the tokens
+in a sequence into non-predicted and predicted parts. Under this uniﬁed view, we propose a new
+pre-training method, masked and permuted language modeling (MPNet for short), which addresses
+the issues in both MLM and PLM while inherits their advantages: 1) It takes the dependency among
+the predicted tokens into consideration through permuted language modeling and thus avoids the
+
+1We do not consider next sentence prediction here since previous works [5, 7, 9] have achieved good results
+
+without next sentence prediction.
+
+34th Conference on Neural Information Processing Systems (NeurIPS 2020), Vancouver, Canada.
+
+issue of BERT; 2) It takes position information of all tokens as input to make the model see the
+position information of all the tokens and thus alleviates the position discrepancy of XLNet.
+
+We pre-train MPNet on a large-scale text corpora (over 160GB data) following the practice in [5, 7],
+and ﬁne-tune on a variety of down-streaming benchmark tasks, including GLUE, SQuAD, RACE
+and IMDB. Experimental results show that MPNet outperforms MLM and PLM by a large margin,
+which demonstrates that 1) the effectiveness of modeling the dependency among the predicted tokens
+(MPNet vs. MLM), and 2) the importance of the position information of the full sentence (MPNet vs.
+PLM). Moreover, MPNet outperforms previous well-known models BERT, XLNet and RoBERTa by
+4.8, 3.4 and 1.5 points respectively on GLUE dev sets under the same model setting, indicating the
+great potential of MPNet for language understanding.

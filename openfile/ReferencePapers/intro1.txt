@@ -1,0 +1,74 @@
+
+Introduction
+
+The Earth is a complex system. Variabilities of the Earth system, ranging from regular events like
+temperature ﬂuctuation to extreme events like drought, hail storm, and El Niño/Southern Oscillation
+(ENSO), impact our daily life. Among all the consequences, Earth system variabilities can inﬂuence
+crop yields, delay airlines, cause ﬂoods and forest ﬁres. Precise and timely forecasting of these vari-
+abilities can help people take necessary precautions to avoid crisis, or better utilize natural resources
+such as wind and solar energy. Thus, improving forecasting models for Earth variabilities (e.g.,
+weather and climate) has a huge socioeconomic impact. Despite its importance, the operational
+weather and climate forecasting systems have not fundamentally changed for almost 50 years [34].
+These operational models, including the state-of-the-art High Resolution Ensemble Forecast (HREF)
+
+⇤Work done while being an intern at Amazon Web Services. †Contact person.
+
+36th Conference on Neural Information Processing Systems (NeurIPS 2022).
+
+Figure 1: Example Vertically Integrated Liquid (VIL) observation sequence from the Storm EVent
+ImageRy (SEVIR) dataset. The observation intensity is mapped to pixel value of the range 0-255.
+The larger value indicates the higher precipitation intensity.
+
+rainfall nowcasting model used in National Oceanic and Atmospheric Administration (NOAA) [32],
+rely on meticulous numerical simulation of physical models. Such simulation-based systems in-
+evitably fall short in the ability to incorporate signals from newly emerging geophysical observation
+systems [12], or take advantage of the Petabytes-scale Earth observation data [43].
+
+As an appealing alternative, deep learning (DL) is offering a new approach for Earth system forecast-
+ing [34]. Instead of explicitly incorporating physical rules, DL-based forecasting models are trained
+on the Earth observation data [36]. By learning from a large amount of observations, DL models
+are able to ﬁgure out the system’s intrinsic physical rules and generate predictions that outperform
+simulation-based models [9]. Such technique has demonstrated success in several applications,
+including precipitation nowcasting [32, 6] and ENSO forecasting [15]. Because the Earth system is
+chaotic [21], high-dimensional, and spatiotemporal, designing appropriate DL architecture for model-
+ing the system is particularly challenging. Previous works relied on the combination of Recurrent
+Neural Networks (RNN) and Convolutional Neural Networks (CNN) [36, 37, 43, 13, 45]. These two
+architectures impose temporal and spatial inductive biases that help capturing spatiotemporal patterns.
+However, as a chaotic system, variabilities of the Earth system, such as rainfall and ENSO, are highly
+sensitive to the system’s initial conditions and can respond abruptly to internal changes. It is unclear
+whether the inductive biases in RNN and CNN models still hold for such complex systems.
+
+On the other hand, recent years have witnessed major breakthroughs in DL brought by the wide
+adoption of Transformer. The model was originally proposed for natural language processing [42, 7],
+and later has been extended to computer vision [8, 22], multimodal text-image generation [31],
+graph learning [52], etc. Transformer relies on the attention mechanism to capture data correlations
+and is powerful at modeling complex and long-range dependencies, both of which appear in Earth
+systems (See Fig. 1 for an example of Earth observation data). Despite being suitable for the problem,
+Transformer sees limited adoption for Earth system forecasting. Naively applying the Transformer
+architecture is infeasible because the O(N 2) attention mechanism is too computationally expensive
+for the high-dimensional Earth observation data. How to design a space-time Transformer that is
+good at predicting the future of the Earth systems is largely an open problem to the community.
+
+In this paper, we propose Earthformer, a space-time Transformer for Earth system forecasting. To
+better explore the design of space-time attention, we propose Cuboid Attention, which is a generic
+building block for efﬁcient space-time attention. The idea is to decompose the input tensor to
+non-overlapping cuboids and apply cuboid-level self-attention in parallel. Since we limit the O(N 2)
+self-attention inside the local cuboids, the overall complexity is greatly reduced. Different types
+of correlations can be captured via different cuboid decompositions. By stacking multiple cuboid
+attention layers with different hyperparameters, we are able to subsume several previously proposed
+video Transformers [19, 23, 4] as special cases, and also come up with new attention patterns that
+were not studied before. A limitation of this design is the lack of a mechanism for the local cuboids to
+communicate with each other. Thus, we introduce a collection of global vectors that attend to all the
+local cuboids, thereby gathering the overall status of the system. By attending to the global vectors,
+the local cuboids can grasp the general dynamics of the system and share information with each other.
+
+To verify the effectiveness of cuboid attention and ﬁgure out the best design under the Earth system
+forecasting scenario, we conducted extensive experiments on two synthetic datasets: the MovingM-
+NIST [36] dataset and a newly proposed N -body MNIST dataset. Digits in the N -body MNIST
+follow the chaotic 3-body motion pattern [25], which makes the dataset not only more challenging
+than MovingMNIST but also more relevant to Earth system forecasting. The synthetic experiments
+reveal the following ﬁndings: 1) stacking cuboid attention layers with the Axial attention pattern is
+both efﬁcient and effective, achieving the best overall performance, 2) adding global vectors provides
+consistent performance gain without increasing the computational cost, 3) adding hierarchy in the
+encoder-decoder architecture can improve performance. Based on these ﬁndings, we ﬁgured out
+the optimal design for Earthformer and made comparisons with other baselines on the SEVIR [43]

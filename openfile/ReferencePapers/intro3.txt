@@ -1,0 +1,62 @@
+Introduction
+
+Many problems in computer science amount to finding the best sequence of objects consistent with
+some precedence constraints. An intuitive example comes from routing problems, where we would
+like to find the shortest route between cities but we have requirements (i.e. for example to pick up
+and subsequently deliver a package) on the order in which the cities should be visited [1]. Another
+case is found in compiler pipelines, wherein the "cities" become operations to be executed and the
+constraints come from the data dependencies between these operations, such as when the result of
+an operation is an operand in a subsequent one. In this case, the metric to be optimized can be the
+run time of the compiled program, or the memory required to execute the program [2]. Common
+across this class of problems is their formulation in term of finding the optimal topological order
+
+∗Equal contribution
+†Qualcomm AI Research is an initiative of Qualcomm Technologies, Inc.
+‡Work completed during employment at Qualcomm Technologies, Inc.
+
+36th Conference on Neural Information Processing Systems (NeurIPS 2022).
+
+of the Directed Acyclic Graph (DAG) that encodes the precedence constraints, which induces a
+Combinatorial Optimization [3] (CO) problem which is in general computationally hard [4].
+
+Already from the two examples above, one can immediately grasp the relevance of such problems
+for industrial Operations Research, which has prompted various actors to invest in the development
+of efficient CO solvers; these solvers usually encapsulate heuristic methods whose design typically
+requires extensive use of domain-specific and problem-specific knowledge, across decades of de-
+velopment. In recent years, considerable interest has emerged in the possibility of replacing such
+handcrafted heuristics with ones learned by deep neural nets [5] (machine learning for combinatorial
+optimization, MLCO). As a matter of fact, both of our two examples of DAG-based CO problems
+have indirectly been object of study in the Machine Learning literature. References [6, 7, 8, 9] take
+into consideration Routing Problems, especially the Traveling Salesperson Problem (TSP) which, on
+account of its richness, complexity and long history of mathematical study [10], has attained the status
+of a standard benchmark for MLCO [8]. Conversely, less attention has been devoted to operations
+sequencing likely due to the proprietary and sensitive nature of compiler workflows, which hampers
+the definition of public benchmarks. References [11, 12] both consider the task of optimizing the
+run time of a neural network’s forward pass by optimizing the ordering and device assignment of
+its required operations. However, in this last case the sequencing stage is only one part of a larger
+compiler pipeline, and as a result of this both the performance metrics and the datasets employed
+cannot be made available for reproduction by third parties. This makes it both hard to assess the
+results therein, and to draw general conclusions and guidelines for the advancement of MLCO, which
+still suffers from a lack of commonly accepted and standard datasets and benchmarks.
+
+In this work, we address the problem of finding optimal topological orders in a DAG using deep
+learning, focusing on the compiler task of optimizing the peak local memory usage during execution.
+We make the following contributions:
+
+• We present a neural framework to optimize sequences on directed acyclic graphs. Mindful of
+the need for scalability, we consider a non-auto-regressive (NAR) scheme for parametrizing the
+probability distribution of topological orders. This allows our method to attain an extremely
+favorable performance vs. run time tradeoff: it always outperforms fast baselines, and is only
+matched or outperformed by those requiring a much longer (in one case 4000x more) run time.
+• We address the problem of how to perform meaningful message-passing on DAGs, a graph type
+which has received comparatively less attention in the literature on Graph Neural Networks. We
+introduce Topoformer, a flexible, attention-based architecture wherein messages can be passed
+between each and every pair of nodes, with a different set of learnable parameters depending on
+the topological relation between the nodes.
+
+• To test our method, we introduce an algorithm for the generation of synthetic, layered, Neural
+Net-like computation graphs, allowing any researcher to generate a dataset of as many as desired
+graphs of any desired size. These graphs are a more faithful model of real NN workflows, and
+allow us to prove our method on a much larger and varied dataset, than previous efforts [11]. To
+our knowledge, this is the first public algorithm of this kind. Nevertheless, we also test our method
+on proprietary graphs to illustrate its relevance to realistic compiler workflows.
