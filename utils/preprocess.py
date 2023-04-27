@@ -25,8 +25,8 @@ def get_data(n):
         data = {}
         with open(f"openfile/ReferencePapers/intro{i}.txt") as f:
             intro = f.read()
-        input = ("here is the introduction sectionof an academic paper,"
-                "please read it carefully and extract the main contribution of this paper")
+        input = (f"here is the introduction section of an academic paper: {intro} "
+                "please read it carefully and extract the main contributions of this paper")
         response = single_chat(input)
         data["introduction"] = intro
         data["contribution"] = response
