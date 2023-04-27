@@ -18,7 +18,8 @@ class IntroAgent:
         self.n = len(dataset)
 
     def initialize_prompt(self):
-        input = ("now you are a professor to write the introduction section of an academic paper based on the given contributions of the paper. "
+        input = (
+            "now you are a professor to write the introduction section of an academic paper based on the given contributions of the paper. "
                 "i want you to list out the key steps to write a good introduction with the given contributions of this paper. "
                 "your are only allow to generate the key steps, do not give me other irrelevant words. "
                 "make sure someone can write a good introduction when follow your key steps. "
@@ -108,3 +109,10 @@ class IntroAgent:
                 print(reward)
                 print("\033[1;33;40mThe Updated Prompt is:\033[0m",end=" ")
                 print(self.prompt)
+    
+    def write_intro(self,file_path):
+        data = self.dataset[0]
+        intro = self.forward(data)
+        with open(file_path,'w') as f:
+            f.write(intro)
+

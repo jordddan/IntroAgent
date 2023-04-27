@@ -14,4 +14,7 @@ if __name__ == "__main__":
 
 
     intro_agent = IntroAgent(prompt_path="openfile/ReferencePapers/prompt.txt",dataset=dataset)
+    
+    intro_agent.write_intro(f"intro_origin.txt")
     intro_agent.train()
+    intro_agent.write_intro(f"intro_traianed.txt")

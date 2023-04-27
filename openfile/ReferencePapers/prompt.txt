@@ -1,6 +1,7 @@
-1. Start with a general statement about the topic of the paper.
-2. Provide background information on the topic to give context to the reader.
-3. Introduce the specific research question or problem that the paper addresses.
-4. State the main contributions of the paper clearly and concisely.
-5. Explain why these contributions are important and relevant to the field.
-6. Provide an overview of the structure of the paper to guide the reader.
+1. Start with a general background of the research topic.
+2. Introduce the specific problem or gap in the literature that the paper aims to address.
+3. Clearly state the research question or objective of the paper.
+4. Provide a brief overview of the methodology used to answer the research question.
+5. Highlight the main contributions of the paper.
+6. Explain the significance of the contributions and how they advance the field.
+7. Provide a roadmap of the paper to guide the reader through the rest of the paper.

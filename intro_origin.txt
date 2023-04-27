@@ -1,0 +1,7 @@
+1. Natural language processing (NLP) has been a rapidly growing field in recent years, with pre-training methods such as Masked Language Modeling (MLM) and Permuted Language Modeling (PLM) showing great promise in improving NLP models' performance. 
+2. However, both MLM and PLM have their limitations, such as ignoring the dependency among predicted tokens and the position discrepancy of XLNet. 
+3. This paper aims to propose a new pre-training method called Masked and Permuted Language Modeling (MPNet), which unifies the advantages of both MLM and PLM while addressing their limitations. 
+4. The authors pre-trained MPNet on a large-scale text corpus and fine-tuned it on various benchmark tasks, showing that it outperforms MLM and PLM by a large margin and also outperforms previous well-known models such as BERT, XLNet, and RoBERTa on the GLUE dev sets. 
+5. The main contribution of this paper is the proposal of MPNet, which takes into consideration the dependency among predicted tokens through permuted language modeling and also takes the position information of all tokens as input. 
+6. The significance of this contribution lies in the fact that MPNet outperforms previous models and provides a new approach to pre-training NLP models. 
+7. The rest of the paper is organized as follows: Section 2 provides a literature review of pre-training methods in NLP, Section 3 describes the methodology used to develop MPNet, Section 4 presents the experimental results, and Section 5 concludes the paper with a discussion of the findings and future research directions.
