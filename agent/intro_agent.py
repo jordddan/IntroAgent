@@ -14,7 +14,7 @@ import copy
 
 class IntroAgent:
 
-    def __init__(self,prompt_path,dataset):
+    def __init__(self, prompt_path, dataset, batch_size, epoch):
 
         self.prompt_path = prompt_path
         self.dataset = dataset
@@ -24,16 +24,16 @@ class IntroAgent:
         # import pdb
         # pdb.set_trace()
         self.n = len(dataset)
-        self.accumulation_step = 1
+        self.batch_size = batch_size
+        self.epoch = epoch
         
     def get_ref(self):
         self.ref = ""
-        ref_dict = {}
-        for data in self.dataset:
+        for i, data in enumerate(self.dataset):
             title = data["title"]
             abstract = data["abstract"]
-            ref_dict[title] = abstract
-        self.ref = json.dumps(ref_dict)
+            line = f"{i}. {title}: \n {abstract} \n\n"
+            self.ref += line
         
 
     def initialize_prompt(self):
@@ -70,8 +70,8 @@ class IntroAgent:
         role = f"Now you are a professor to write the introduction section of an academic paper based on our work. "
         input = (
                  f"The main contribution of the our work is: \n \n {contribution}. "
-                 f"Here is the related work references in json format, the key is the title and the value is the abstract: \n{self.ref}\n"\
-                 f"You should follow the key steps below to write the introduction:\n \n"
+                 f"Here are the related works, each one contain the title and the abstract:  \n{self.ref}\n"
+                 f"You should follow the key steps below to write the introduction section based on the contribution and related works given above:\n \n"
                  f"{self.prompt}. "
                  f"The introduction should be divided into several paragraphs and total words used in this section should be more than {words}. "
                  f"You should only give me the content of the introduction section, do not give me any extra words. "
@@ -168,8 +168,9 @@ class IntroAgent:
         role = "You are a review summary robot that can help me summarize the reviewers' feedback."
         input = (f"I have written a machine learning paper, here are some review comments from different reviewers: " 
                  f"\n\n {rewards} \n\n"
-                  "You should help me conclude the common important comments, making sure there are no repetitions."
-                  "Your response should only contain the summarized reviews."
+                 f"You should help me conclude the common important comments, make sure there are no repetitions. "
+                 f"You should summerize these comments to the most important one or two points from these comments. "
+                 f"Your response should only contain the summarized reviews."
                  f"Your response cannot exceed 50 words")
         response = single_chat(content=input, role=role)
 
@@ -183,7 +184,7 @@ class IntroAgent:
         while True:
             cnt += 1
             self.st = set()
-            if cnt > 3:
+            if cnt > self.epoch:
                 break
             accumulate_rewards = ""
             shuffle(self.dataset)
@@ -200,7 +201,7 @@ class IntroAgent:
                         break
                     
                 # gradient accumulation update
-                if (i+1) % self.accumulation_step == 0 or i==7:
+                if (i+1) % self.batch_size == 0 or i==7:
                     accumulate_rewards = self.gradient_accumulation(accumulate_rewards)
                     print("\033[1;34;40mThe Reward is:\033[0m",end=" ")
                     print(accumulate_rewards)
@@ -213,7 +214,7 @@ class IntroAgent:
             if len(self.st) > 3:
                 break
 
-        with open(f"output/step{self.accumulation_step}/prompt_trained.txt",'w') as f:
+        with open(f"output/step{self.batch_size}/prompt_trained.txt",'w') as f:
             f.write(self.prompt)
 
     def write_intro(self,file_path, words):
@@ -232,8 +233,8 @@ class IntroAgent:
         role = f"Now you are a professor to write the introduction section of an academic paper based on our work. "
         input = (
                  f"The main contribution of the our work is: \n \n {contribution}. "
-                 f"Here is the related work in json dict format, the key is the title and the value is the abstract: \n{self.ref}\n"\
-                 f"You should strictly follow the guidance below to organize:\n \n"
+                 f"Here are the related works, each one contain the title and the abstract:  \n{self.ref}\n"
+                 f"You should follow the key steps below to write the introduction section based on the contribution and related works given above:\n \n"
                  f"{self.prompt}. "
                  f"The introduction should be divided into several paragraphs and total words used in this section should be more than {words}. "
                  f"You should only give me the content of the introduction section, do not give me any extra words. "
