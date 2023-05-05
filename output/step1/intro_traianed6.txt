@@ -1,0 +1,13 @@
+Machine translation has been a long-standing challenge in the field of natural language processing. While autoregressive (AR) models have achieved impressive performance, non-autoregressive (NAR) models have been proposed to address the issue of slow decoding speed. However, leading NAR models still lag behind their AR counterparts, and only become competitive when trained with distillation. In this paper, we investigate possible reasons behind this performance gap, namely, the indistinguishability of tokens and mismatch between training and inference. 
+
+To address these issues, we propose the Conditional Masked Language Model with Correction (CMLMC), which builds upon the Conditional Masked Language Model (CMLM) and introduces a novel correction loss that teaches the model how to correct translation mistakes made in early decoding iterations from the fully masked sentence. We also modify the decoder structure of CMLM by exposing the positional encodings and incorporating causal attention layers to differentiate adjacent tokens. 
+
+Our proposed approach achieves new state-of-the-art undistilled NAR results and approaches AR performance on multiple NMT benchmarks. The contributions of this paper are four-fold: (1) proposing the CMLMC which addresses the shortcomings of the CMLM in NAR machine translation, (2) modifying the decoder structure of CMLM, (3) proposing a novel correction loss, and (4) achieving new state-of-the-art undistilled NAR results. 
+
+Related work in the field of machine translation is also discussed, highlighting the strengths and weaknesses of existing methods and how the proposed approach builds upon or differs from them. We provide a comprehensive overview of related work, with a focus on providing a more comprehensive overview of existing methods. 
+
+The methodology used to address the research question is also presented, including a detailed explanation of the proposed approach, pre-training, and fine-tuning. We provide a clearer explanation of the proposed approach, with a focus on being more explicit in stating the experimental results and their significance. 
+
+Experimental results are presented to support the claims made in the paper, comparing the proposed approach with existing methods and addressing the limitations of the study. We provide a clear and concise statement of the main contribution of the paper, emphasizing the novelty and significance of the proposed approach. 
+
+Finally, we provide an overview of the paper's structure, including a brief summary of each section, to help the reader navigate the paper more easily.

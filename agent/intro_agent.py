@@ -24,7 +24,7 @@ class IntroAgent:
         # import pdb
         # pdb.set_trace()
         self.n = len(dataset)
-        self.accumulation_step = 3
+        self.accumulation_step = 1
         
     def get_ref(self):
         self.ref = ""
@@ -210,7 +210,7 @@ class IntroAgent:
                     print(self.prompt)
 
             print(self.st)
-            if len(self.st) > 2:
+            if len(self.st) > 3:
                 break
 
         with open(f"output/step{self.accumulation_step}/prompt_trained.txt",'w') as f:
@@ -232,7 +232,7 @@ class IntroAgent:
         role = f"Now you are a professor to write the introduction section of an academic paper based on our work. "
         input = (
                  f"The main contribution of the our work is: \n \n {contribution}. "
-                 f"Here is the related work references in json format, the key is the title and the value is the abstract: \n{self.ref}\n"\
+                 f"Here is the related work in json dict format, the key is the title and the value is the abstract: \n{self.ref}\n"\
                  f"You should strictly follow the guidance below to organize:\n \n"
                  f"{self.prompt}. "
                  f"The introduction should be divided into several paragraphs and total words used in this section should be more than {words}. "
