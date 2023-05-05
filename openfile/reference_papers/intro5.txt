@@ -1,6 +1,4 @@
 
-Introduction
-
 Pre-training language models [1, 2, 3, 4, 5, 6, 7, 8] have greatly boosted the accuracy of NLP tasks
 in the past years. One of the most successful models is BERT [2], which mainly adopts masked
 language modeling (MLM) for pre-training1. MLM leverages bidirectional context of masked tokens

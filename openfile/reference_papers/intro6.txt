@@ -1,0 +1,58 @@
+
+INTRODUCTION
+
+Neural machine translation (NMT) models based on the Transformer architecture have achieved
+leading performance (Vaswani et al., 2017; Barrault et al., 2019; Huang et al., 2020). Majority
+of the proposed approaches are based on the autoregressive (AR) principle, where translation is
+done one token at a time conditioning on already translated tokens. AR inference scales linearly
+with the number of tokens and full forward pass through the decoder is required for each translated
+token. This can be prohibitively expensive for long sequences, particularly as leading models are
+becoming increasingly larger in size. To mitigate this problem, recent works have explored the
+non-autoregressive (NAR) approach where subsets of tokens are translated in parallel (Gu et al., 2018;
+Ghazvininejad et al., 2019; Kasai et al., 2020). NAR models achieve signiﬁcantly faster inference
+speed that no longer depends on sequence length. However, despite considerable progress, leading
+NAR models still require sequence-level knowledge distillation (Kim & Rush, 2016) to achieve
+competitive accuracy. In practice, a large AR Transformer model trained on the raw data is used
+as the teacher for distillation (Ghazvininejad et al., 2019). This process is expensive, as every new
+language pair requires training a new teacher. It is also non-standard, and raises questions to the
+necessity and the underlying problems solved by distillation (Zhou et al., 2020; Ding et al., 2021).
+
+In this work we focus on one of the leading NAR approaches, the Conditional Masked Language
+Model (CMLM) (Ghazvininejad et al., 2019). CMLM achieved leading NAR performance on
+multiple NMT datasets - especially when combined with semi-autoregressive training (Ghazvininejad
+et al., 2020b) - but only when the model is trained on distilled data. Without distillation, CMLM
+performance drops signiﬁcantly below AR benchmarks. The need for distillation indicates that
+CMLM alone is unable to fully leverage the information available in the raw training data (Ding et al.,
+2021). Here, we identify two shortcomings of CMLM that, when addressed, signiﬁcantly improve
+NAR translation quality and narrow the gap between raw and distilled performance.
+
+First, input token representations in CMLM can become nearly indistinguishable, especially for
+adjacent positions. In AR models this problem is avoided by a combination of causal masked attention,
+sequential inference, and learned positional encodings (PEs). However, unmasked attention and
+simultaneous translation of token blocks in CMLM loses most of the information that distinguishes
+tokens. This problem is particularly severe during the ﬁrst inference step, where the input is fully
+masked. The model thus only relies on learned PEs to distinguish tokens, which is not sufﬁcient.
+Poor token separation can cause signiﬁcant translation errors, including the identiﬁed phenomenon of
+token repetition stemming from the related multi-modality problem (Zhou et al., 2020).
+
+1
+
+Published as a conference paper at ICLR 2022
+
+Second, there is a misalignment between CMLM’s training and inference procedures. During training
+CMLM is optimized with a masked loss analogous to language model training in popular models
+such as BERT (Devlin et al., 2019). However, CMLM inference always starts with a fully masked
+sentence and translates all tokens simultaneously. Iterative reﬁnement is then applied where subsets
+of low conﬁdence tokens are masked and re-translated at each iteration. During training the model
+rarely sees a fully masked sentence, and is not trained to self-correct from the initial fully masked
+translation that can contain signiﬁcant errors. The misalignment between the two procedures can
+cause a disconnect, where optimization of the training loss does not transfer to improvements in
+translation quality.
+
+In this work we propose the Conditional Masked Language Model with Correction (CMLMC). Our
+model builds on the CMLM architecture and addresses the aforementioned problems. We modify the
+decoder structure by exposing the positional encodings and incorporating causal attention layers to
+differentiate adjacent tokens. We also propose a novel correction loss that teaches the model how to
+correct translation mistakes made in early decoding iterations from the fully masked sentence. With
+these improvements, CMLMC achieves new state-of-the-art undistilled NAR results and approaches
+AR performance on multiple NMT benchmarks.

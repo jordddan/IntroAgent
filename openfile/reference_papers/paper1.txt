@@ -608,13 +608,13 @@ masking, and BERT without next sentence prediction.
 
 93.9
 
-65.2
-
-91.1
+94.4
 
 88.4
 
-94.4
+91.1
+
+65.2
 
 90.0
 
@@ -1548,10 +1548,10 @@ linear
 Table 8: Hyperparameters for ﬁnetuning.
 
 1e-6
-1.0
+0.75
 
 1e-6
-0.75
+1.0
 
 512
 128

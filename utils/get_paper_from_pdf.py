@@ -182,7 +182,7 @@ class Paper:
 
 
 def main():
-    path = r'openfile/janus2022.pdf'
+    path = r'openfile/reference_papers/paper6.pdf'
     paper = Paper(path=path)
     paper.parse_pdf()
     import pdb

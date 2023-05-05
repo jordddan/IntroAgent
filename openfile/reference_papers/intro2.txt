@@ -1,0 +1,108 @@
+
+1. Introduction
+
+Various pretraining methods (Song et al., 2019; Lewis et al.,
+2019; Qi et al., 2020; Raffel et al., 2020; Zhang et al., 2019a)
+have been successfully applied in natural language gener-
+ation. Most of the pretraining works are based on Trans-
+former and designed with autoregressive (AR) language
+model. Transformer based pretraining models show consis-
+
+*Equal contribution 1University of Science and Technology of
+China, Hefei, China 2During Internship at MSRA 3Microsoft Re-
+search Asia, Beijing, China 4Microsoft, Redmond, USA 5Sichuan
+University, Chengdu, China. Correspondence to: Yeyun Gong
+<yegong@microsoft.com>.
+
+tent improvements with larger model size and larger pretrain-
+ing corpus. Although the autoregressive generation method
+achieves high-quality results in many tasks, its latency is a
+well-known limitation for online real-time usage.
+
+Non-autoregressive (NAR) models (Gu et al., 2017; Lee
+et al., 2018; Ghazvininejad et al., 2019; Raffel et al., 2020;
+Zhang et al., 2019a) are proposed to reduce generation la-
+tency. Different from AR models which generate tokens
+sequentially, NAR models generate tokens in parallel. Com-
+pared to AR models, NAR models generally come with a
+much lower inference latency, but a decrease in accuracy. In
+order to balance latency and accuracy, semi-NAR generation
+models (Stern et al., 2019; Lee et al., 2018; Gu et al., 2019;
+Ghazvininejad et al., 2019) are proposed. However, most of
+the NAR and semi-NAR models focus on translation tasks
+rather than general natural langauge generation tasks, which
+are proved to signiﬁcantly beneﬁt from pretraining (Qi et al.,
+2020; Lewis et al., 2019). Some works (Guo et al., 2020b;
+Su et al., 2021) initialize their NAR models with pretrained
+natural language understanding model BERT (Devlin et al.,
+2018) for better performance. To the best of our knowledge,
+this paper proposes the ﬁrst large-scale pretraining model
+designed for NAR and semi-NAR generation.
+
+In this paper, we propose a new model named BANG 1 to
+bridge the gap between AR and NAR via pretraining a gen-
+erative model. Speciﬁcally, we consider pretraining model
+using AR, semi-NAR and NAR objectives with different
+attention mechanisms, which decide what extent previous
+tokens can be attended to. Precisely, BANG is pretrained to
+predict each token with arbitrary length of previous golden
+tokens replaced with special token [MASK]s. For example,
+with complete previous golden tokens, BANG predicts the
+next token in the AR manner. With all previous tokens re-
+placed by [MASK], BANG predicts the next token in the
+NAR manner.
+
+For AR models, the training strategy of teacher-forcing is
+commonly used, which uses the golden tokens as previous
+context to predict the next token. For NAR models, [MASK]
+initialization (Ghazvininejad et al., 2019) or other methods
+
+Proceedings of the 38 th International Conference on Machine
+Learning, PMLR 139, 2021. Copyright 2021 by the author(s).
+
+1https://github.com/microsoft/BANG
+
+ 
+ 
+ 
+ 
+ 
+ 
+BANG: Bridging Autoregressive and Non-autoregressive Generation with Large Scale Pretraining
+
+like encoder copy (Gu et al., 2017) and posterior distribu-
+tion approximation (Shu et al., 2020) are applied. In BANG
+pretraining, we consider the previous context of golden and
+[MASK] tokens, with arbitrary golden tokens’ length and
+[MASK] tokens’ length. To achieve an efﬁcient implemen-
+tation for multiple arbitrary alternatives in a same output
+sequence, we propose a new structure named cross-stream
+visible n-stream self-attention, which can be used to train
+BANG with different golden and [MASK] tokens’ combina-
+tions. For usage on downstream tasks, the single pretrained
+BANG model can be directly ﬁnetuned for either vanilla AR
+models or vanilla NAR models. Additionally, BANG can
+also be ﬁnetuned for hybrid semi-NAR models, which sup-
+port predicting tokens with arbitrary previous golden tokens
+or [MASK]. Concretely, for semi-NAR generation, BANG
+predicts the ﬁrst several tokens one by one as a high-quality
+sub-sequence hint, then produces all the remaining tokens
+simultaneously.
+
+Our main contributions are: 1) BANG bridges the gap
+between AR and NAR by considering arbitrary previous
+[MASK] length during large-scale pretraining. 2) BANG is
+pretrained using an efﬁcient cross-stream visible n-stream
+decoder to realize parallelization. Given multiple arbitrary
+number of previous tokens replaced with [MASK], every
+token is trained to predict simultaneously at each time step.
+3) BANG supports NAR, semi-NAR and AR ﬁnetuning to
+meet different requirements with the same pretrained model
+structure. 4) We pretrain BANG with 16GB English lan-
+guage corpora of Wikipedia and BookCorpus, and ﬁnetune
+it on 3 popular natural language generation tasks in AR,
+semi-NAR and NAR manners, respectively. For NAR and
+semi-NAR ﬁnetuning, BANG achieves signiﬁcant perfor-
+mance improvements on all the tasks. For AR ﬁnetuning
+with the comparison to strong AR pretrained models, BANG
+can attain comparable performance.
