@@ -1,0 +1,15 @@
+Introduction:
+
+Pre-training language models have significantly improved the performance of natural language processing (NLP) tasks in recent years. Autoregressive (AR) models, such as BERT and XLNet, and non-autoregressive (NAR) models, such as BANG and ProphetNet, have been proposed to address different challenges in sequence generation tasks. However, both AR and NAR models have their own limitations. AR models can achieve excellent performance but suffer from slow decoding speed, while NAR models bring fast decoding speed but often lag behind AR models in terms of performance. 
+
+To address these limitations, this paper proposes a new pre-training method called Conditional Masked Language Model with Correction (CMLMC) for NAR machine translation. CMLMC addresses the shortcomings of the Conditional Masked Language Model (CMLM) in NAR machine translation by modifying the decoder structure of CMLM and proposing a novel correction loss that teaches the model how to correct translation mistakes made in early decoding iterations from the fully masked sentence. 
+
+Specifically, the decoder structure of CMLM is modified by exposing the positional encodings and incorporating causal attention layers to differentiate adjacent tokens. The proposed correction loss encourages the model to learn from its mistakes and correct them in subsequent decoding iterations. 
+
+Experimental results show that CMLMC achieves new state-of-the-art undistilled NAR results and approaches AR performance on multiple NMT benchmarks. This demonstrates the effectiveness of the proposed method in improving NAR machine translation performance. 
+
+Related works have proposed various pre-training methods for sequence generation tasks. BERT adopts masked language modeling (MLM) for pre-training, while XLNet introduces permuted language modeling (PLM) to capture the dependency among the predicted tokens. BANG proposes a new pre-training model that bridges the gap between AR and NAR generation, while ProphetNet introduces a novel self-supervised objective named future n-gram prediction and the proposed n-stream self-attention mechanism. 
+
+In addition, JANUS proposes a joint autoregressive and non-autoregressive training method using an auxiliary loss to enhance the model performance in both AR and NAR manner simultaneously. Universal Conditional Masked Language Pre-training (CeMAT) pre-trains a unified model for fine-tuning on both AR and NAR NMT tasks. 
+
+Overall, this paper proposes a new pre-training method that addresses the limitations of existing NAR machine translation models and achieves state-of-the-art performance. The proposed method can potentially be applied to other sequence generation tasks and improve their performance as well.

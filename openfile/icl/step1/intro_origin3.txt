@@ -1,0 +1,13 @@
+Introduction:
+
+Sequence modeling and transduction problems have been widely studied in the field of artificial intelligence. In recent years, neural network architectures have shown remarkable success in these areas. In this paper, we introduce the Transformer, a new neural network architecture that relies entirely on an attention mechanism to draw global dependencies between input and output, without the need for recurrent networks. 
+
+The Transformer architecture allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs. This is a significant improvement over previous neural network architectures that relied on recurrent networks. 
+
+The key components of the Transformer architecture are scaled dot-product attention, multi-head attention, and the parameter-free position representation. These components allow the Transformer to effectively model long-range dependencies and capture bidirectional context. 
+
+To implement and evaluate the Transformer, we developed tensor2tensor, a library for training deep learning models in a distributed and efficient manner. Tensor2tensor was used to pre-train and fine-tune the Transformer on various tasks, including machine translation and natural language inference. 
+
+Related works have explored various pre-training objectives, including autoregressive (AR) language modeling and autoencoding (AE). AR language modeling estimates the probability distribution of a text corpus with an autoregressive model, while AE-based pretraining aims to reconstruct the original data from corrupted input. The Transformer architecture overcomes the limitations of both AR and AE-based pretraining by relying solely on an attention mechanism. 
+
+In conclusion, the Transformer architecture, along with its key components and tensor2tensor library, represents a significant advancement in the field of sequence modeling and transduction problems. The Transformer's ability to capture bidirectional context and model long-range dependencies has led to state-of-the-art performance on various tasks, including machine translation and natural language inference.

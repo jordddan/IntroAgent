@@ -102,6 +102,7 @@ class IclAgnet:
                 f"You should follow the key steps above to write the introduction section based on the contribution and related works given above:\n \n"
                 f"The introduction should be divided into several paragraphs and total words used in this section should be more than {words}. "
                 f"You should only give me the content of the introduction section, do not give me any extra words. "
+                f"When you write the introduction, make sure the content and the order of the paragraphs strictly follow the key steps. "
         )
       
         input_list = [input1,input2]
@@ -109,7 +110,7 @@ class IclAgnet:
 
         response = multi_chat(input_list,reply_list,role)
         self.prompt = p
-        return response # y'
+        return response # y''
 
     def get_reward(self,data, predict_intro): # R
         contribution =  data["contribution"]
@@ -165,7 +166,8 @@ class IclAgnet:
                  f"You need to point out the shortcomings in the introduction written by "
                  f"your student compared with the correct answer.  "
                  f"You should read both of them carefully and make comparisons from the perspective of academical paper writing. "
-                 f"For example you can make considerations like: Is the order of paragraphs correct? Is the logic of the sections coherent? and so on. "
+                 f"For example, you can make considerations like: Which paragraph should you write first? "
+                 f"Is the logic of the sections coherent? and so on. "
             )
             
             response = single_chat(input,role)
@@ -197,12 +199,13 @@ class IclAgnet:
     def gradient_accumulation(self, rewards):
 
         role = "You are a review summary robot that can help me summarize the reviewers' feedback."
-        input = (f"I have written a machine learning paper, here are some review comments from different reviewers: " 
+        input = (
+                 f"I have written a machine learning paper, here are some review comments from different reviewers: " 
                  f"\n\n {rewards} \n\n"
-                 f"You should help me conclude the common important comments, make sure there are no repetitions. "
-                 f"You should summerize these comments to the most important one or two points from these comments. "
-                 f"Your response should only contain the summarized reviews."
-                 f"Your response cannot exceed 50 words")
+                 f"You should help me conclude the common important comments, make sure there are no repetitions. \n"
+                 f"You should summerize these comments to the most important 1 or 2 points, i just want the most important one or two advice. \n"
+                 f"Your response should only contain the summarized reviews. "
+                 )
         response = single_chat(content=input, role=role)
 
         return response
@@ -245,7 +248,7 @@ class IclAgnet:
             if len(self.st) > 3:
                 break
 
-        with open(f"output2/step{self.batch_size}/prompt_trained.txt",'w') as f:
+        with open(f"openfile/icl/step{self.batch_size}/prompt_trained.txt",'w') as f:
             f.write(self.prompt)
 
     def write_intro(self,file_path, words):
@@ -277,6 +280,7 @@ class IclAgnet:
                 f"You should follow the key steps above to write the introduction section based on the contribution and related works given above:\n \n"
                 f"The introduction should be divided into several paragraphs and total words used in this section should be more than {words}. "
                 f"You should only give me the content of the introduction section, do not give me any extra words. "
+                f"When you write the introduction, make sure the content and the order of the paragraphs strictly follow the key steps. "
         )
       
         input_list = [input1,input2]
@@ -284,7 +288,7 @@ class IclAgnet:
 
         response = multi_chat(input_list,reply_list,role)
         self.prompt = p
-        return response # y'
+        return response # y''
  
     def test_all(self, name, words):
 
