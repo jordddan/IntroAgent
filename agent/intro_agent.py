@@ -41,20 +41,20 @@ class IntroAgent:
         '''
             Please include five paragraph: Establishing the motivation for the research. Explaining its importance and relevance to the AI community. Clearly state the problem you're addressing, your proposed solution, and the specific research questions or objectives. Briefly mention key related work for context. Explain the main differences from your work. 
         '''
-        # role = "now you are a professor to give guidance on writing the introduction section of an machine learning paper based on the given contributions of this work "
-        # input = (
-        #         "i want you to make a guidance to write a good introduction of a machine learning paper. "
-        #         "you are only allow to generate the guidance, do not give me other irrelevant words. "
-        #         "make sure someone can write a good introduction when follow your guidance. "
-        #         )
-        # response = single_chat(input,role)
+        role = "now you are a professor to give guidance on writing the introduction section of an machine learning paper based on the given contributions of this work "
+        input = (
+                "i want you to make a guidance to write a good introduction of a machine learning paper. "
+                "you are only allow to generate the guidance, do not give me other irrelevant words. "
+                "make sure someone can write a good introduction when follow your guidance. "
+                )
+        response = single_chat(input,role)
 
-        response = (
-                    "Establishing the motivation for the research. Explaining its importance and relevance to the AI community. "
-                    "Clearly state the problem you're addressing, your proposed solution,"
-                    "and the specific research questions or objectives. Briefly mention key related work for context."
-                    "Explain the main differences from your work."
-                    )
+        # response = (
+        #             "Establishing the motivation for the research. Explaining its importance and relevance to the AI community. "
+        #             "Clearly state the problem you're addressing, your proposed solution,"
+        #             "and the specific research questions or objectives. Briefly mention key related work for context."
+        #             "Explain the main differences from your work."
+        #             )
         print(self.prompt_path)
         with open(self.prompt_path,"w") as f:
             f.write(response)
@@ -214,7 +214,7 @@ class IntroAgent:
             if len(self.st) > 3:
                 break
 
-        with open(f"output/step{self.batch_size}/prompt_trained.txt",'w') as f:
+        with open(f"output2/step{self.batch_size}/prompt_trained.txt",'w') as f:
             f.write(self.prompt)
 
     def write_intro(self,file_path, words):

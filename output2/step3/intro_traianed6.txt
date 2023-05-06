@@ -1,0 +1,11 @@
+The field of natural language processing has seen significant advancements in recent years, with pretraining-based approaches like BERT achieving state-of-the-art performance on a wide range of tasks. However, these approaches suffer from limitations such as the pretrain-finetune discrepancy and the independence assumption made in BERT. In this paper, we propose XLNet, a generalized autoregressive pretraining method that overcomes these limitations and achieves superior performance on a wide range of tasks.
+
+To provide context for our proposed approach, we first provide a comprehensive overview of related works in the field. We highlight the strengths and weaknesses of each approach and how they relate to our proposed model. Specifically, we discuss the use of autoregressive and autoencoding methods in pretraining, as well as recent advancements in architectural designs for pretraining.
+
+We then explain the importance of addressing the limitations of current pretraining-based approaches and provide a clear motivation for our proposed model. We highlight the significance of bidirectional context and the importance of addressing the pretrain-finetune discrepancy.
+
+Next, we provide a clear and concise summary of our proposed approach, highlighting its novelty and how it addresses the research question. We discuss the use of permutation-based language modeling and the incorporation of recurrence mechanisms and relative encoding schemes from Transformer-XL.
+
+Finally, we summarize the main contributions of our paper, highlighting the key findings and how they advance the field. Specifically, we introduce XLNet, which combines the best of both autoregressive language modeling and autoencoding while avoiding their limitations. We demonstrate that XLNet consistently outperforms BERT on a wide range of tasks, including language understanding, reading comprehension, text classification, and document ranking.
+
+In the following sections, we provide a detailed description of our proposed approach, experimental results, and analysis. We believe that our work provides a significant contribution to the field of natural language processing and has the potential to advance the state-of-the-art in pretraining-based approaches.

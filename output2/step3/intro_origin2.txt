@@ -1,0 +1,9 @@
+Machine learning has become an essential tool in various fields, including natural language processing, computer vision, and robotics. In this paper, we focus on the problem of bridging the gap between autoregressive (AR) and non-autoregressive (NAR) generation, which has been a long-standing challenge in the field of sequence generation. 
+
+Our main objective is to propose a large-scale pretraining model, BANG, designed explicitly for NAR and semi-NAR generation. BANG is pretrained using an efficient cross-stream visible n-stream decoder that supports predicting tokens with arbitrary previous golden tokens or [MASK]. Moreover, BANG supports NAR, semi-NAR, and AR finetuning to meet different requirements with the same pretrained model structure. 
+
+Our contributions are significant, as BANG achieves significant performance improvements on all the tasks for NAR and semi-NAR finetuning. For AR finetuning, it can attain comparable performance with the comparison to strong AR pretrained models. To the best of our knowledge, this is the first large-scale pretraining model designed explicitly for NAR and semi-NAR generation, which bridges the gap between AR and NAR via pretraining a generative model. 
+
+In addition to our proposed model, we also provide a comprehensive review of related works, including Universal Conditional Masked Language Pre-training, ProphetNet, JANUS, IMPROVING NON-AUTOREGRESSIVE TRANSLATION MODELS WITHOUT DISTILLATION, MPNet, XLNet, and Attention Is All You Need. These works have contributed significantly to the field of sequence generation and have inspired our proposed approach. 
+
+The rest of the paper is organized as follows. In Section 2, we provide a detailed description of our proposed model, BANG. In Section 3, we present the experimental results and compare them with the state-of-the-art models. Finally, we conclude the paper in Section 4 and discuss future research directions.
