@@ -1,0 +1,13 @@
+Introduction:
+
+Sequence modeling and transduction problems have been widely studied in the field of deep learning. Recurrent neural networks (RNNs) and convolutional neural networks (CNNs) have been the most popular approaches for these tasks. However, these models have limitations in terms of parallelization and long-term dependencies. To address these limitations, this paper proposes a new neural network architecture called the Transformer, which relies entirely on an attention mechanism to draw global dependencies between input and output, without the need for recurrent networks.
+
+The Transformer introduces several key components, including scaled dot-product attention, multi-head attention, and the parameter-free position representation. These components enable the Transformer to achieve significantly more parallelization and reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs. The proposal of these components is one of the main contributions of this paper.
+
+In addition to the proposed architecture, this paper also introduces tensor2tensor, a library for training deep learning models in a distributed and efficient manner. Tensor2tensor was used to implement and evaluate the Transformer, and its development is another contribution of this paper.
+
+The proposed Transformer architecture and tensor2tensor library have been evaluated on several tasks, including machine translation, language modeling, and document ranking. The results show that the Transformer outperforms existing models, including ensembles, by a large margin. The Transformer also achieves a new single-model state-of-the-art BLEU score of 41.0 on the WMT 2014 English-to-French translation task after training for 3.5 days on eight GPUs.
+
+This paper also reviews related works in the field, including autoregressive and non-autoregressive models, and discusses how the proposed Transformer architecture differs from them. The review highlights the strengths and weaknesses of existing models and explains how the proposed approach fills the gaps in the existing literature.
+
+In summary, this paper proposes a new neural network architecture called the Transformer, which relies entirely on an attention mechanism to draw global dependencies between input and output. The Transformer introduces several key components, including scaled dot-product attention, multi-head attention, and the parameter-free position representation, which enable it to achieve significantly more parallelization and reach a new state of the art in translation quality. The proposed architecture and tensor2tensor library have been evaluated on several tasks and outperform existing models by a large margin.

@@ -1,0 +1,13 @@
+Introduction:
+
+Neural network architectures for sequence modeling and transduction problems have been widely studied in recent years. The Transformer is a new architecture that relies entirely on an attention mechanism to draw global dependencies between input and output, without the need for recurrent networks. This paper introduces the Transformer and demonstrates its superiority over existing models in terms of parallelization and translation quality.
+
+The Transformer architecture includes several key components, such as scaled dot-product attention, multi-head attention, and the parameter-free position representation. These components are essential for the Transformer to achieve its state-of-the-art performance. The paper also proposes tensor2tensor, a library for training deep learning models in a distributed and efficient manner, which was used to implement and evaluate the Transformer.
+
+The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs. This is a significant improvement over existing models, which require much longer training times and do not achieve the same level of translation quality.
+
+The proposed scaled dot-product attention, multi-head attention, and parameter-free position representation are key components of the Transformer architecture. These components enable the Transformer to draw global dependencies between input and output, which is essential for achieving its state-of-the-art performance.
+
+The paper also introduces tensor2tensor, a library for training deep learning models in a distributed and efficient manner. This library was used to implement and evaluate the Transformer, and it is a significant contribution to the field of deep learning.
+
+In summary, this paper introduces the Transformer, a new neural network architecture for sequence modeling and transduction problems. The Transformer relies entirely on an attention mechanism to draw global dependencies between input and output, without the need for recurrent networks. The paper also proposes scaled dot-product attention, multi-head attention, and parameter-free position representation, which are key components of the Transformer architecture. Finally, the paper introduces tensor2tensor, a library for training deep learning models in a distributed and efficient manner, which was used to implement and evaluate the Transformer.

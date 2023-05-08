@@ -1,0 +1,9 @@
+Introduction:
+
+Recent advances in natural language processing have been driven by the success of large-scale pre-trained language models, such as BERT (Devlin et al., 2018) and XLNet (Yang et al., 2019). These models have achieved state-of-the-art performance on various natural language understanding tasks. However, these models are based on autoregressive (AR) language modeling, which estimates the probability distribution of the text corpus by predicting one token at a time. This approach can be computationally expensive, especially for long sequences, and limits the parallelization of the generation process. To address these issues, non-autoregressive (NAR) models have been proposed, which can generate tokens in parallel. However, NAR models have not yet achieved the same level of performance as AR models.
+
+To bridge the gap between AR and NAR models, we propose BANG, the first large-scale pre-training model designed for NAR and semi-NAR generation. BANG is pre-trained using an efficient cross-stream visible n-stream decoder to realize parallelization, which supports predicting tokens with arbitrary previous golden tokens or [MASK]. BANG supports NAR, semi-NAR, and AR fine-tuning to meet different requirements with the same pre-trained model structure. 
+
+Our proposed model, BANG, achieves significant performance improvements on all the tasks for NAR and semi-NAR fine-tuning. For AR fine-tuning, it can attain comparable performance with the comparison to strong AR pre-trained models. The proposed model structure of BANG is designed to bridge the gap between AR and NAR models, which can be seen as a combination of the advantages of both models. 
+
+Related works have explored various approaches to improve the performance of NAR models. ProphetNet (Qi et al., 2020) introduced a novel self-supervised objective named future n-gram prediction and the proposed n-stream self-attention mechanism. XLNet (Yang et al., 2019) pr

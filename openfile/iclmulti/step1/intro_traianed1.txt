@@ -1,0 +1,19 @@
+Introduction:
+
+Pre-training language models have revolutionized natural language processing (NLP) tasks in recent years. However, existing pre-training methods, such as BERT, suffer from limitations that affect their performance on downstream tasks. In this paper, we propose XLNet, a generalized autoregressive pre-training method that combines the best of both autoregressive language modeling and autoencoding while avoiding their limitations. 
+
+XLNet maximizes the expected log likelihood of a sequence with respect to all possible permutations of the factorization order, allowing each position to utilize contextual information from both left and right, capturing bidirectional context. This approach overcomes the limitations of BERT, which relies on corrupting the input with masks and neglects dependency between the masked positions, leading to a pretrain-finetune discrepancy. 
+
+XLNet does not suffer from this discrepancy, and the autoregressive objective provides a natural way to use the product rule for factorizing the joint probability of the predicted tokens, eliminating the independence assumption made in BERT. We also improve architectural designs for pretraining by incorporating the recurrence mechanism and relative encoding scheme of Transformer-XL into pretraining, which empirically improves performance, especially for tasks involving longer text sequences.
+
+To address the ambiguity in naively applying a Transformer(-XL) architecture to permutation-based language modeling, we propose a reparameterization of the Transformer(-XL) network. 
+
+Empirical results demonstrate that XLNet consistently outperforms BERT on a wide spectrum of problems, including GLUE language understanding tasks, reading comprehension tasks like SQuAD and RACE, text classification tasks such as Yelp and IMDB, and the ClueWeb09-B document ranking task. Our proposed method also achieves state-of-the-art results on these tasks compared to other pre-trained models, such as RoBERTa. 
+
+Related Works:
+
+Our proposed method builds on previous work in the field of pre-training language models. Attention mechanisms have been shown to be effective in sequence-to-sequence models, as demonstrated in the Transformer model. The Transformer model is based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. 
+
+Other related works have explored the use of autoregressive and non-autoregressive models for sequence generation tasks. JANUS is a joint autoregressive and non-autoregressive training method that enhances model performance in both AR and NAR manner simultaneously and effectively alleviates the problem of distribution discrepancy. BANG bridges the gap between autoregressive and non-autoregressive generation by designing a novel model structure for large-scale pretraining. ProphetNet introduces a novel self-supervised objective named future n-gram prediction and the proposed n-stream self-attention mechanism. 
+
+Our proposed method, XLNet, builds on these previous works and improves upon them by introducing a generalized autoregressive pre-training method that overcomes the limitations of existing methods and achieves state-of-the-art results on a wide range of NLP tasks.

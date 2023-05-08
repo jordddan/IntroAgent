@@ -1,0 +1,15 @@
+Introduction:
+
+Sequence modeling and transduction problems have been widely studied in the field of artificial intelligence. Recurrent neural networks (RNNs) and convolutional neural networks (CNNs) have been established as state-of-the-art approaches in these tasks. However, these models have inherent limitations, such as sequential computation and difficulty in parallelization. 
+
+To address these limitations, this paper introduces the Transformer, a new neural network architecture for sequence modeling and transduction problems. The Transformer relies entirely on an attention mechanism to draw global dependencies between input and output, without the need for recurrent networks. This architecture has several advantages, including significantly more parallelization and the ability to reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.
+
+The Transformer architecture proposes several key components, including scaled dot-product attention, multi-head attention, and the parameter-free position representation. These components are essential for the Transformer to achieve its superior performance. 
+
+To implement and evaluate the Transformer, this paper also introduces tensor2tensor, a library for training deep learning models in a distributed and efficient manner. Tensor2tensor was used to pre-train and fine-tune the Transformer on various tasks, including machine translation and language modeling.
+
+This paper's contributions are significant, including the introduction of the Transformer architecture, the demonstration of its superior performance, the proposal of key components, and the development of tensor2tensor. These contributions have advanced the field of sequence modeling and transduction problems and have the potential to impact various applications in natural language processing and other related fields.
+
+Related works:
+
+Several related works have contributed to the development of the Transformer architecture and its applications. Attention Is All You Need proposed the Transformer architecture and demonstrated its superior performance in machine translation tasks. Universal Conditional Masked Language Pre-training introduced a pre-trained sequence-to-sequence model with a bidirectional decoder, which produced notable performance gains for both autoregressive and non-autoregressive machine translation. XLNet proposed a generalized autoregressive pre-training method that overcomes the limitations of BERT and achieves better performance on multiple tasks. ProphetNet introduced a new sequence-to-sequence pre-training model called ProphetNet, which achieved new state-of-the-art results on various benchmarks. Finally, IMPROVING NON-AUTOREGRESSIVE TRANSLATION MODELS WITHOUT DISTILLATION proposed a new pre-training method that addresses the problems of indistinguishability of tokens and mismatch between training and inference. These related works have contributed to the development of the Transformer architecture and its applications, and their findings have been incorporated into this paper's contributions.

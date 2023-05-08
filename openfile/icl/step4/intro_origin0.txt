@@ -1,0 +1,15 @@
+Introduction:
+
+Pre-training large-scale sequence-to-sequence (Seq2Seq) models has become a popular approach to improve the accuracy of natural language processing (NLP) tasks. In this paper, we introduce a new pre-trained Seq2Seq model called ProphetNet, which achieves state-of-the-art results on several benchmarks. The main contributions of this paper are:
+
+Firstly, we propose a novel self-supervised objective called future n-gram prediction, which encourages the model to plan for future tokens and prevents overfitting on strong local correlations. This objective is optimized by simultaneously predicting the future n-gram at each time step during the training phase, which allows the model to take into consideration the dependency among the predicted tokens.
+
+Secondly, we extend the two-stream self-attention mechanism proposed in XLNet to n-stream self-attention, which includes a main stream self-attention and n extra self-attention predicting streams for future n-gram prediction. This extension allows the model to leverage the full position information of a sentence and reduces the position discrepancy between pre-training and fine-tuning.
+
+Thirdly, we pre-train ProphetNet on two scale pre-trained datasets and achieve new state-of-the-art results on CNN/DailyMail and Gigaword, using only about 1/3 pre-training epochs of BART and about 1/5 pre-training corpus of T5 and PEGASUS.
+
+Fourthly, we fine-tune ProphetNet on several natural language generation (NLG) tasks and achieve the best performance on CNN/DailyMail, Gigaword, and SQuAD 1.1 question generation tasks compared to the models using the same base scale pre-training dataset.
+
+Previous works have explored different pre-training objectives for Seq2Seq models. BERT adopts masked language modeling (MLM) for pre-training, which efficiently leverages bidirectional context of masked tokens but ignores the dependency among the masked tokens. XLNet introduces permuted language modeling (PLM) for pre-training to capture the dependency among the predicted tokens, but it suffers from position discrepancy between pre-training and fine-tuning. Other works have proposed non-autoregressive (NAR) approaches that translate blocks of tokens in parallel to accelerate inference. However, leading NAR models still lag behind their autoregressive counterparts and only become competitive when trained with distillation.
+
+In this paper, we propose ProphetNet, which unifies the advantages of MLM and PLM while addressing their limitations. We also introduce a novel self-supervised objective and extend the self-attention mechanism to reduce the position discrepancy. Our experiments show that ProphetNet achieves new state-of-the-art results on several benchmarks and outperforms previous pre-trained models such as BERT, XLNet, and RoBERTa.

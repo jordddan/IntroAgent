@@ -1,0 +1,13 @@
+INTRODUCTION
+
+Pre-training language models have become a popular approach for improving machine translation performance. However, existing pre-training models such as BERT and GPT-2 have limitations that affect downstream tasks. In this paper, we propose a new pre-training method called CeMAT that addresses these limitations and improves machine translation performance on both Autoregressive NMT (AT) and Non-autoregressive NMT (NAT) tasks.
+
+CeMAT is a pre-training model for machine translation that consists of a bidirectional encoder, a bidirectional decoder, and a cross-attention module for bridging them. It is pre-trained on both monolingual and bilingual corpora and can provide unified initialization parameters for both AT and NAT tasks. This is a significant contribution as it allows for a more efficient and effective pre-training process.
+
+To enhance the model training under the setting of bidirectional decoders, we introduce two techniques: aligned code-switching & masking and dynamic dual-masking. Aligned code-switching & masking is applied based on a multilingual translation dictionary and word alignment between source and target sentences, while dynamic dual-masking is used to mask the contents of the source and target languages. These techniques are novel and effective in improving the performance of the model.
+
+We demonstrate the effectiveness of CeMAT in improving machine translation performance on both low-resource and high-resource settings. CeMAT achieves consistent improvements over strong competitors in both AT and NAT tasks with data of varied sizes. This is a significant contribution as it shows the potential of CeMAT in real-world applications.
+
+Related works have explored various approaches to improve machine translation performance, including joint autoregressive and non-autoregressive training, attention-based models, and pre-training models with different objectives. However, our proposed CeMAT model stands out as it addresses the limitations of existing pre-training models and achieves consistent improvements in both AT and NAT tasks.
+
+In summary, this paper proposes a new pre-training method called CeMAT that addresses the limitations of existing pre-training models and improves machine translation performance on both AT and NAT tasks. The proposed aligned code-switching & masking and dynamic dual-masking techniques are effective in enhancing the model training under the setting of bidirectional decoders. Our experimental results demonstrate the effectiveness of CeMAT in improving machine translation performance on both low-resource and high-resource settings.

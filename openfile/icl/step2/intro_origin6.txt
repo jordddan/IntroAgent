@@ -1,0 +1,11 @@
+Introduction:
+
+Pre-trained sequence-to-sequence models have significantly improved Neural Machine Translation (NMT) in recent years. However, the traditional autoregressive (AR) models can be time-consuming, especially for long sequences. To address this issue, non-autoregressive (NAR) approaches have been explored, but they still lag behind their AR counterparts and only become competitive when trained with distillation. In this paper, we propose the Conditional Masked Language Model with Correction (CMLMC), which addresses the shortcomings of the Conditional Masked Language Model (CMLM) in NAR machine translation.
+
+The CMLM decoder structure is modified by exposing the positional encodings and incorporating causal attention layers to differentiate adjacent tokens. However, CMLM suffers from translation mistakes made in early decoding iterations from the fully masked sentence. To overcome this limitation, we propose a novel correction loss that teaches the model how to correct translation mistakes made in early decoding iterations from the fully masked sentence.
+
+Our proposed CMLMC achieves new state-of-the-art undistilled NAR results and approaches AR performance on multiple NMT benchmarks. To the best of our knowledge, this is the first work to propose a correction loss for NAR machine translation.
+
+Related works have explored different pre-training methods for NMT. Universal Conditional Masked Language Pre-training proposes a conditional masked language model pre-trained on large-scale bilingual and monolingual corpora in many languages. ProphetNet introduces a novel self-supervised objective named future n-gram prediction and the proposed n-stream self-attention mechanism. XLNet is a generalized autoregressive pre-training method that enables learning bidirectional contexts by maximizing the expected likelihood over all permutations of the factorization order and overcomes the limitations of BERT thanks to its autoregressive formulation. 
+
+In conclusion, our proposed CMLMC with correction loss achieves new state-of-the-art undistilled NAR results and approaches AR performance on multiple NMT benchmarks. Our work contributes to the development of NAR machine translation and provides a new perspective on how to address the limitations of CMLM.

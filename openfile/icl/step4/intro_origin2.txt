@@ -1,0 +1,9 @@
+INTRODUCTION
+
+Neural machine translation (NMT) has made significant progress in recent years, with the introduction of new neural network architectures and pre-training methods. In this paper, we present the Transformer, a new neural network architecture for sequence modeling and transduction problems that relies entirely on an attention mechanism to draw global dependencies between input and output, without the need for recurrent networks. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.
+
+The key innovation of the Transformer is the attention mechanism, which allows the model to draw global dependencies between input and output without the need for recurrent networks. We propose scaled dot-product attention, multi-head attention, and the parameter-free position representation, which are key components of the Transformer architecture. These components enable the model to capture long-range dependencies and improve the quality of the translation.
+
+To implement and evaluate the Transformer, we developed tensor2tensor, a library for training deep learning models in a distributed and efficient manner. Tensor2tensor was used to train the Transformer and evaluate its performance on various NMT benchmarks. Our experiments show that the Transformer outperforms previous state-of-the-art models on several benchmarks, including the WMT 2014 English-to-German and English-to-French translation tasks.
+
+In conclusion, the Transformer represents a significant advancement in NMT and sequence modeling. Its attention mechanism allows for more efficient and accurate translation, and its components enable the model to capture long-range dependencies. The development of tensor2tensor also provides a powerful tool for training deep learning models in a distributed and efficient manner.

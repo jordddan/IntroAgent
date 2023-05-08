@@ -1,0 +1,15 @@
+The introduction of this paper presents a new generalized autoregressive pretraining method called XLNet, which combines the best of both autoregressive language modeling and autoencoding while avoiding their limitations. The main contributions of this paper are:
+
+Firstly, XLNet introduces a novel self-supervised objective future n-gram prediction, which maximizes the expected log likelihood of a sequence with respect to all possible permutations of the factorization order, allowing each position to utilize contextual information from both left and right, capturing bidirectional context. This approach overcomes the limitations of BERT, which suffers from the pretrain-finetune discrepancy.
+
+Secondly, XLNet does not make the independence assumption made in BERT, and the autoregressive objective provides a natural way to use the product rule for factorizing the joint probability of the predicted tokens. This approach eliminates the pretrain-finetune discrepancy that BERT is subject to.
+
+Thirdly, the paper improves architectural designs for pretraining by incorporating the recurrence mechanism and relative encoding scheme of Transformer-XL into pretraining, which empirically improves performance, especially for tasks involving longer text sequences.
+
+Fourthly, the paper proposes a reparameterization of the Transformer(-XL) network to remove the ambiguity in naively applying a Transformer(-XL) architecture to permutation-based language modeling.
+
+Finally, the paper empirically demonstrates that XLNet consistently outperforms BERT on a wide spectrum of problems, including GLUE language understanding tasks, reading comprehension tasks like SQuAD and RACE, text classification tasks such as Yelp and IMDB, and the ClueWeb09-B document ranking task.
+
+Related works include Attention Is All You Need, which proposes a new simple network architecture, the Transformer, based solely on attention mechanisms, and IMPROVING NON-AUTOREGRESSIVE TRANSLATION MODELS WITHOUT DISTILLATION, which investigates possible reasons behind the performance gap between autoregressive and non-autoregressive approaches and proposes a solution called Conditional Masked Language Model with Correction (CMLMC). Other related works include JANUS, BANG, ProphetNet, and Universal Conditional Masked Language Pre-training, which propose new pre-training models and methods to improve performance on various natural language processing tasks.
+
+In summary, this paper presents a new generalized autoregressive pretraining method called XLNet, which overcomes the limitations of BERT and consistently outperforms it on a wide range of natural language processing tasks. The proposed method introduces a novel self-supervised objective future n-gram prediction, improves architectural designs for pretraining, and proposes a reparameterization of the Transformer(-XL) network. The related works provide insights into the challenges and solutions in pretraining and natural language processing tasks.

@@ -1,0 +1,28 @@
+Paragraph 1: Context and Background Information
+
+Sequence generation tasks have been widely studied in natural language processing (NLP), such as machine translation and text summarization. Autoregressive (AR) models, which generate one token at a time conditioned on the previous tokens, have been the dominant approach for these tasks. However, AR models suffer from slow inference speed and error propagation, which limits their practical applications. Non-autoregressive (NAR) models, which generate tokens in parallel, have been proposed to address these issues. However, NAR models often sacrifice performance for speed and suffer from the problem of incomplete generation. Therefore, there is a need for a method that combines the strengths of both AR and NAR models while avoiding their weaknesses to improve performance.
+
+Paragraph 2: Related Work
+
+Several recent works have proposed methods to bridge the gap between AR and NAR models. MPNet (0) combines the advantages of masked language modeling (MLM) and permuted language modeling (PLM) to improve pre-training performance. CeMAT (1) pre-trains a sequence-to-sequence model with a bidirectional decoder and achieves significant improvements for both AR and NAR tasks. BANG (3) proposes a new pre-training model that bridges AR and NAR generation by designing a novel model structure. JANUS (4) introduces a joint AR and NAR training method to enhance the model performance in both AR and NAR manners simultaneously. ProphetNet (5) presents a new pre-training model that introduces a novel self-supervised objective named future n-gram prediction and the proposed n-stream self-attention mechanism. XLNet (6) enables learning bidirectional contexts by maximizing the expected likelihood over all permutations of the factorization order and overcomes the limitations of BERT. However, these methods still have limitations in terms of performance and efficiency.
+
+Paragraph 3: Research Questions and Objectives
+
+In this paper, we propose JANUS, a method that combines the strengths of both AR and NAR models while avoiding their weaknesses to improve performance. Specifically, we introduce an auxiliary distribution P AUX to bridge the discrepancy between P AR and P NAR, which benefits AR and NAR to learn from each other. Our research questions are: Can JANUS improve the performance of both AR and NAR models? Can JANUS achieve comparable performance with the state-of-the-art NAR model without distillation data? Can JANUS improve the AR model performance?
+
+Paragraph 4: Main Contribution
+
+The main contributions of this paper are: 
+
+1. Introducing JANUS, a method that combines the strengths of both AR and NAR models while avoiding their weaknesses to improve performance.
+2. Proposing an auxiliary distribution P AUX to bridge the discrepancy between P AR and P NAR, which benefits AR and NAR to learn from each other.
+3. Demonstrating the effectiveness of JANUS on multiple NMT datasets and autoregressive pretraining models, achieving similar results to the state-of-the-art NAR model without distillation data and improving the AR model performance by more than 1.5 BLEU scores on average.
+4. Exceeding the non-autoregressive pretraining model BANG on the same GLGE tasks and achieving comparable performance with the AR manner at least two times speedup based on the iterative inference mechanism.
+
+Paragraph 5: Methodology and Evaluation Metrics
+
+We evaluate JANUS on multiple NMT datasets and autoregressive pretraining models. We use BLEU score as the evaluation metric for machine translation tasks. We also compare JANUS with the state-of-the-art NAR model and the non-autoregressive pretraining model BANG on the same GLGE tasks. We use the iterative inference mechanism to achieve comparable performance with the AR manner at least two times speedup.
+
+Paragraph 6: Significance and Conclusion
+
+The proposed JANUS method has significant implications for improving the performance and efficiency of sequence generation tasks. By combining the strengths of both AR and NAR models, JANUS achieves comparable performance with the state-of-the-art NAR model without distillation data and improves the AR model performance. The proposed auxiliary distribution P AUX bridges the discrepancy between P AR and P NAR, which benefits AR and NAR to learn from each other. The experimental results demonstrate the effectiveness of JANUS on multiple NMT datasets and autoregressive pretraining models. The proposed JANUS method has the potential to be applied to other sequence generation tasks and improve their performance and efficiency.
