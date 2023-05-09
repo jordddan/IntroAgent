@@ -9,10 +9,11 @@ import os
 
 from pdfminer.high_level import extract_text
 import openai
-from utils.chat import single_chat
 import torch
-from utils.get_paper_from_pdf import Paper
+import json
+from get_paper_from_pdf import Paper
 import tiktoken
+from chat import single_chat
 
 def num_tokens_from_string(string: str, encoding_name: str) -> int:
     """Returns the number of tokens in a text string."""
@@ -73,5 +74,84 @@ def get_data(n):
     torch.save(dataset,"openfile/dataset")
     return dataset
       
+def extract_intro(n):
+    '''
+        args:
+            n: means should construct data from paper 1-n 
+        
+        outputs:
+            dataset: list of data, each element is a dict with 2 key: "introduction","contribution"
+    '''
 
-    
+    for i in range(0,n):
+        data = {}
+        # with open(f"openfile/ReferencePapers/intro{i}.txt") as f:
+        #     intro = f.read()
+        # input = (f"here is the introduction section of an academic paper: {intro} "
+        #         "please read it carefully and extract the main contributions of this paper")
+        # response = single_chat(input)
+        print(i)
+        path = f"openfile/data/paper{i}.pdf"
+        text_path = f"openfile/data/paper{i}.txt"
+        intro_path = f"openfile/data/intro{i}.txt"
+        abstract_path = f"openfile/data/abstract{i}.txt"
+        title_path = f"openfile/data/title{i}.txt"
+        paper = Paper(path=path)
+        paper.parse_pdf()
+        all_text = extract_text(path)
+        with open(text_path,'w') as f:
+            f.write(all_text)
+        print(paper.section_names)
+        intro = ""
+        abstract = ""
+        if "Introduction" in paper.section_texts:
+            intro = paper.section_texts["Introduction"]
+        if "Abstract" in paper.section_texts:
+            abstract = paper.section_texts["Abstract"]
+        title = paper.title 
+
+        # with open(intro_path,'w') as f:
+        #     f.write(intro)
+
+        with open(abstract_path,'w') as f:
+            f.write(abstract)
+
+        # with open(title_path,'w') as f:
+        #     f.write(title)
+
+def get_dataset(n):
+
+    dataset = []
+    for i in range(n):
+        with open(f"openfile/data/title{i}.txt", 'r') as f:
+            title = f.read()
+        with open(f"openfile/data/intro{i}.txt", 'r') as f:
+            intro = f.read()
+        with open(f"openfile/data/abstract{i}.txt", 'r') as f:
+            abstract = f.read()
+        
+        words = num_tokens_from_string(intro,"cl100k_base")
+
+        input = (f"Here is the introduction section of an academic paper: {intro} "
+                f"please read it carefully and extract the main contributions of this paper."
+                f"The contribution should be as detailed as possible."
+                f"you should only return the extracted contribution without any prompt word.")
+        response = single_chat(input)
+        contribution = response
+
+        data = dict()
+        data["introduction"] = intro
+        data["contribution"] = contribution
+        data["title"] = title 
+        data["words"] = words
+        data["abstract"] = abstract
+
+        dataset.append(data)
+        print(i,title)
+    with open("openfile/dataset.json",'w') as f:
+        for data in dataset:
+            f.write(json.dumps(data)+"\n")
+
+if __name__ == "__main__":
+    # extract_intro(73)
+    get_dataset(73)
