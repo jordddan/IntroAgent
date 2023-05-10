@@ -11,9 +11,9 @@ from pdfminer.high_level import extract_text
 import openai
 import torch
 import json
-from get_paper_from_pdf import Paper
+from utils.get_paper_from_pdf import Paper
 import tiktoken
-from chat import single_chat
+from utils.chat import single_chat
 
 def num_tokens_from_string(string: str, encoding_name: str) -> int:
     """Returns the number of tokens in a text string."""

@@ -19,10 +19,17 @@ def single_chat(content,role=None):
                 {"role":"system","content":role},
                 {"role":"user","content":content}
                 ]
+    # try:
+    #     response = openai.ChatCompletion.create(engine="mtutor-openai-dev",
+    #                         messages = messages,
+    #                         temperature=0,)
+    # except:
+    #     print(content)
+    #     import pdb
+    #     pdb.set_trace()
     response = openai.ChatCompletion.create(engine="mtutor-openai-dev",
                             messages = messages,
                             temperature=0,)
-    
     res = response["choices"][0]["message"]["content"]
     # print("\033[1;32;40mConversation Response:\033[0m",end=" ")
     # print(res)

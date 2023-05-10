@@ -1,8 +1,0 @@
-Based on the given introduction, the closest match is Revised key steps version 3. Here is the complete content of the guidance:
-
-1. Start with a general introduction to the field of pre-training language models and the importance of improving their performance.
-2. Provide context and background information on the limitations of existing pre-training language models, such as BERT and GPT-2, and how they affect downstream tasks.
-3. Clearly state the problem being addressed, which is the limitations of existing pre-training language models, and the specific research questions or objectives, which is to propose a new pre-training method called XLNet that addresses these limitations and improves downstream task performance.
-4. Explain the proposed XLNet method in detail, including its novel techniques or algorithms used to enhance the model training, and the dataset used, with a clear explanation of the methodology used.
-5. Provide a comprehensive overview of related works, highlighting the main differences from XLNet and a comparison with other state-of-the-art methods in the field, and how XLNet addresses the limitations of these methods.
-6. Present a summary of the experimental results and main findings, with detailed analysis and interpretation, and clearly state the limitations of the proposed approach and provide insights into future research directions.
