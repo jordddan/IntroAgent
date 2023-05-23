@@ -1,6 +1,6 @@
 import openai
 import os
-os.environ["OPENAI_API_KEY"] = 'a41acec784d340b184bc71d850c97a7f'
+os.environ["OPENAI_API_KEY"] = 'xxxxxxxxxxx'
 openai.api_type = "azure"
 
 openai.api_base = "https://mtutor-dev.openai.azure.com/"
